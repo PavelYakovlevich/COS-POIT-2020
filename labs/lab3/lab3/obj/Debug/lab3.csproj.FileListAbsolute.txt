@@ -1,0 +1,12 @@
+D:\University\labs\4.1\COS\labs\lab3\lab3\obj\Debug\lab3.csprojAssemblyReference.cache
+D:\University\labs\4.1\COS\labs\lab3\lab3\obj\Debug\lab3.Form1.resources
+D:\University\labs\4.1\COS\labs\lab3\lab3\obj\Debug\lab3.Properties.Resources.resources
+D:\University\labs\4.1\COS\labs\lab3\lab3\obj\Debug\lab3.SpectrumGraphics.resources
+D:\University\labs\4.1\COS\labs\lab3\lab3\obj\Debug\lab3.csproj.GenerateResource.cache
+D:\University\labs\4.1\COS\labs\lab3\lab3\obj\Debug\lab3.csproj.CoreCompileInputs.cache
+D:\University\labs\4.1\COS\labs\lab3\lab3\bin\Debug\lab3.exe.config
+D:\University\labs\4.1\COS\labs\lab3\lab3\bin\Debug\lab3.exe
+D:\University\labs\4.1\COS\labs\lab3\lab3\bin\Debug\lab3.pdb
+D:\University\labs\4.1\COS\labs\lab3\lab3\obj\Debug\lab3.exe
+D:\University\labs\4.1\COS\labs\lab3\lab3\obj\Debug\lab3.pdb
+D:\University\labs\4.1\COS\labs\lab3\lab3\obj\Debug\lab3.SignalCompareForm.resources
