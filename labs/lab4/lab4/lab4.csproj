@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Classes\BitmapHelperUtil.cs" />
     <Compile Include="Classes\Gauss.cs" />
+    <Compile Include="Classes\IAlgorythm.cs" />
     <Compile Include="Classes\MedianFilter.cs" />
     <Compile Include="Classes\SlidingWindow.cs" />
     <Compile Include="Classes\Sobel.cs" />

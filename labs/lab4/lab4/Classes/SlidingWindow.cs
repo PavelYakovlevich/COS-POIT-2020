@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace lab4.Classes
 {
-    public class SlidingWindow
+    public class SlidingWindow : IAlgorythm
     {
         public Bitmap Process(Bitmap source)
         {

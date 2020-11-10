@@ -8,15 +8,21 @@ using System.Windows.Forms;
 
 namespace lab4.Classes
 {
-    public class Sobel
+    public class Sobel : IAlgorythm
     {
         private int[,] _gx = new int[,] { { -1, 0, 1 }, { -2, 0, 2 }, { -1, 0, 1 } };
         private int[,] _gy = new int[,] { { 1, 2, 1 }, { 0, 0, 0 }, { -1, -2, -1 } };
 
-        public void Process(PictureBox sourcePB, PictureBox toPB, int limit)
+        public int Limit { get; set; }
+
+        public Sobel(int limit)
         {
-            Bitmap source = new Bitmap(sourcePB.Image);
-            Bitmap to = new Bitmap(sourcePB.Image);
+            Limit = limit;
+        }
+
+        public Bitmap Process(Bitmap source)
+        {
+            Bitmap result = new Bitmap(source);
 
             int height = source.Height;
             int width = source.Width;
@@ -50,17 +56,17 @@ namespace lab4.Classes
                         }
                     }
 
-                    if (newXR * newXR + newYR * newYR > limit ||
-                        newXG * newXG + newYG * newYG > limit ||
-                        newXB * newXB + newYB * newYB > limit)
+                    if (newXR * newXR + newYR * newYR > Limit ||
+                        newXG * newXG + newYG * newYG > Limit ||
+                        newXB * newXB + newYB * newYB > Limit)
 
-                        to.SetPixel(i, j, Color.Black);
+                        result.SetPixel(i, j, Color.Black);
                     else
-                        to.SetPixel(i, j, Color.White);
+                        result.SetPixel(i, j, Color.White);
                 }
             }
 
-            toPB.Image = to;
+            return result;
         }
     }
 }

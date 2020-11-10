@@ -9,16 +9,23 @@ using System.Threading.Tasks;
 
 namespace lab4.Classes
 {
-    public class MedianFilter
+    public class MedianFilter : IAlgorythm
     {
-        public Bitmap Filter(Bitmap sourceBitmap,
-                             int matrixSize,
-                             int bias = 0,
-                             bool grayscale = false)
+        public bool GrayScale { get; private set; }
+        public int Bias { get; private set; }
+        public int MatrixSize { get; private set; }
+        public MedianFilter(int matrixSize, int bias = 0, bool grayscale = false)
+        {
+            MatrixSize = matrixSize;
+            Bias = bias;
+            GrayScale = grayscale;
+        }
+
+        public Bitmap Process(Bitmap source)
         {
             BitmapData sourceData =
-                       sourceBitmap.LockBits(new Rectangle(0, 0,
-                       sourceBitmap.Width, sourceBitmap.Height),
+                       source.LockBits(new Rectangle(0, 0,
+                       source.Width, source.Height),
                        ImageLockMode.ReadOnly,
                        PixelFormat.Format32bppArgb);
 
@@ -31,9 +38,9 @@ namespace lab4.Classes
             Marshal.Copy(sourceData.Scan0, pixelBuffer, 0,
                                        pixelBuffer.Length);
 
-            sourceBitmap.UnlockBits(sourceData);
+            source.UnlockBits(sourceData);
 
-            if (grayscale == true)
+            if (GrayScale == true)
             {
                 float rgb = 0;
 
@@ -50,7 +57,7 @@ namespace lab4.Classes
                 }
             }
 
-            int filterOffset = (matrixSize - 1) / 2;
+            int filterOffset = (MatrixSize - 1) / 2;
             int calcOffset = 0;
 
             int byteOffset = 0;
@@ -59,10 +66,10 @@ namespace lab4.Classes
             byte[] middlePixel;
 
             for (int offsetY = filterOffset; offsetY <
-                sourceBitmap.Height - filterOffset; offsetY++)
+                source.Height - filterOffset; offsetY++)
             {
                 for (int offsetX = filterOffset; offsetX <
-                    sourceBitmap.Width - filterOffset; offsetX++)
+                    source.Width - filterOffset; offsetX++)
                 {
                     byteOffset = offsetY *
                                  sourceData.Stride +
@@ -97,8 +104,8 @@ namespace lab4.Classes
                 }
             }
 
-            Bitmap resultBitmap = new Bitmap(sourceBitmap.Width,
-                                             sourceBitmap.Height);
+            Bitmap resultBitmap = new Bitmap(source.Width,
+                                             source.Height);
 
             BitmapData resultData =
                        resultBitmap.LockBits(new Rectangle(0, 0,

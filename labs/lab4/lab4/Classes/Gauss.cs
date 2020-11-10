@@ -8,19 +8,26 @@ using System.Windows.Forms;
 
 namespace lab4.Classes
 {
-    public class Gauss
+    public class Gauss : IAlgorythm
     {
-        public Bitmap Blur(Bitmap source, double sigma)
+        public double Sigma { get; private set; }
+
+        public Gauss(double sigma)
+        {
+            Sigma = sigma;
+        }
+
+        public Bitmap Process(Bitmap source)
         {
             Bitmap result = new Bitmap(source);
 
             int height = source.Height;
             int width = source.Width;
 
-            int windowSize = (int)Math.Ceiling(3 * sigma);
+            int windowSize = (int)Math.Ceiling(3 * Sigma);
 
             double sum = 0;
-            double s2 = 2 * sigma * sigma;
+            double s2 = 2 * Sigma * Sigma;
 
             double[] window = new double[windowSize];
 
@@ -39,7 +46,7 @@ namespace lab4.Classes
                     for (int k = 0; k < windowSize; k++)
                     {
                         int l = i + k;
-                        if (l < width) 
+                        if (l < width)
                         {
                             Color temp = source.GetPixel(l, j);
                             R += (int)(temp.R * window[k]);
@@ -100,5 +107,7 @@ namespace lab4.Classes
                 window[i] = Math.Exp(-i * i / dQSigma);
             }
         }
+
+       
     }
 }

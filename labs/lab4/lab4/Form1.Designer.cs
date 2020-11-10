@@ -28,100 +28,89 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pictureBoxSource = new System.Windows.Forms.PictureBox();
             this.pictureBoxResult = new System.Windows.Forms.PictureBox();
-            this.btnSobel = new System.Windows.Forms.Button();
-            this.btnGauss = new System.Windows.Forms.Button();
-            this.btnMedian = new System.Windows.Forms.Button();
-            this.btnSlidingWindow = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSource)).BeginInit();
+            this.btnLoadImage = new System.Windows.Forms.Button();
+            this.cmbBox = new System.Windows.Forms.ComboBox();
+            this.lblAlgorythm = new System.Windows.Forms.Label();
+            this.openFileDlgLoadPicture = new System.Windows.Forms.OpenFileDialog();
+            this.btnProcessImage = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxResult)).BeginInit();
             this.SuspendLayout();
             // 
-            // pictureBoxSource
-            // 
-            this.pictureBoxSource.Image = global::lab4.Properties.Resources.putin;
-            this.pictureBoxSource.Location = new System.Drawing.Point(12, 12);
-            this.pictureBoxSource.Name = "pictureBoxSource";
-            this.pictureBoxSource.Size = new System.Drawing.Size(590, 427);
-            this.pictureBoxSource.TabIndex = 0;
-            this.pictureBoxSource.TabStop = false;
-            // 
             // pictureBoxResult
             // 
-            this.pictureBoxResult.Location = new System.Drawing.Point(757, 12);
+            this.pictureBoxResult.Location = new System.Drawing.Point(12, 12);
             this.pictureBoxResult.Name = "pictureBoxResult";
-            this.pictureBoxResult.Size = new System.Drawing.Size(590, 427);
+            this.pictureBoxResult.Size = new System.Drawing.Size(640, 367);
             this.pictureBoxResult.TabIndex = 1;
             this.pictureBoxResult.TabStop = false;
             // 
-            // btnSobel
+            // btnLoadImage
             // 
-            this.btnSobel.Location = new System.Drawing.Point(626, 12);
-            this.btnSobel.Name = "btnSobel";
-            this.btnSobel.Size = new System.Drawing.Size(115, 88);
-            this.btnSobel.TabIndex = 2;
-            this.btnSobel.Text = "Sobel";
-            this.btnSobel.UseVisualStyleBackColor = true;
-            this.btnSobel.Click += new System.EventHandler(this.btnSobel_Click);
+            this.btnLoadImage.Location = new System.Drawing.Point(12, 392);
+            this.btnLoadImage.Name = "btnLoadImage";
+            this.btnLoadImage.Size = new System.Drawing.Size(108, 87);
+            this.btnLoadImage.TabIndex = 2;
+            this.btnLoadImage.Text = "Загрузить картинку";
+            this.btnLoadImage.UseVisualStyleBackColor = true;
+            this.btnLoadImage.Click += new System.EventHandler(this.btnLoadImage_Click);
             // 
-            // btnGauss
+            // cmbBox
             // 
-            this.btnGauss.Location = new System.Drawing.Point(626, 137);
-            this.btnGauss.Name = "btnGauss";
-            this.btnGauss.Size = new System.Drawing.Size(115, 70);
-            this.btnGauss.TabIndex = 3;
-            this.btnGauss.Text = "Gauss";
-            this.btnGauss.UseVisualStyleBackColor = true;
-            this.btnGauss.Click += new System.EventHandler(this.btnGauss_Click);
+            this.cmbBox.FormattingEnabled = true;
+            this.cmbBox.Location = new System.Drawing.Point(214, 427);
+            this.cmbBox.Name = "cmbBox";
+            this.cmbBox.Size = new System.Drawing.Size(195, 21);
+            this.cmbBox.TabIndex = 3;
             // 
-            // btnMedian
+            // lblAlgorythm
             // 
-            this.btnMedian.Location = new System.Drawing.Point(626, 245);
-            this.btnMedian.Name = "btnMedian";
-            this.btnMedian.Size = new System.Drawing.Size(115, 74);
-            this.btnMedian.TabIndex = 4;
-            this.btnMedian.Text = "Median";
-            this.btnMedian.UseVisualStyleBackColor = true;
-            this.btnMedian.Click += new System.EventHandler(this.btnMedian_Click);
+            this.lblAlgorythm.AutoSize = true;
+            this.lblAlgorythm.Location = new System.Drawing.Point(214, 402);
+            this.lblAlgorythm.Name = "lblAlgorythm";
+            this.lblAlgorythm.Size = new System.Drawing.Size(56, 13);
+            this.lblAlgorythm.TabIndex = 4;
+            this.lblAlgorythm.Text = "Алгоритм";
             // 
-            // btnSlidingWindow
+            // openFileDlgLoadPicture
             // 
-            this.btnSlidingWindow.Location = new System.Drawing.Point(626, 364);
-            this.btnSlidingWindow.Name = "btnSlidingWindow";
-            this.btnSlidingWindow.Size = new System.Drawing.Size(115, 74);
-            this.btnSlidingWindow.TabIndex = 5;
-            this.btnSlidingWindow.Text = "Sliding window";
-            this.btnSlidingWindow.UseVisualStyleBackColor = true;
-            this.btnSlidingWindow.Click += new System.EventHandler(this.btnSlidingWindow_Click);
+            this.openFileDlgLoadPicture.FileName = "openFileDialog1";
+            // 
+            // btnProcessImage
+            // 
+            this.btnProcessImage.Location = new System.Drawing.Point(531, 392);
+            this.btnProcessImage.Name = "btnProcessImage";
+            this.btnProcessImage.Size = new System.Drawing.Size(108, 87);
+            this.btnProcessImage.TabIndex = 5;
+            this.btnProcessImage.Text = "Обработать картинку";
+            this.btnProcessImage.UseVisualStyleBackColor = true;
+            this.btnProcessImage.Click += new System.EventHandler(this.btnProcessImage_Click);
             // 
             // formMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1360, 450);
-            this.Controls.Add(this.btnSlidingWindow);
-            this.Controls.Add(this.btnMedian);
-            this.Controls.Add(this.btnGauss);
-            this.Controls.Add(this.btnSobel);
+            this.ClientSize = new System.Drawing.Size(668, 488);
+            this.Controls.Add(this.btnProcessImage);
+            this.Controls.Add(this.lblAlgorythm);
+            this.Controls.Add(this.cmbBox);
+            this.Controls.Add(this.btnLoadImage);
             this.Controls.Add(this.pictureBoxResult);
-            this.Controls.Add(this.pictureBoxSource);
             this.Name = "formMain";
             this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxResult)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.PictureBox pictureBoxSource;
         private System.Windows.Forms.PictureBox pictureBoxResult;
-        private System.Windows.Forms.Button btnSobel;
-        private System.Windows.Forms.Button btnGauss;
-        private System.Windows.Forms.Button btnMedian;
-        private System.Windows.Forms.Button btnSlidingWindow;
+        private System.Windows.Forms.Button btnLoadImage;
+        private System.Windows.Forms.ComboBox cmbBox;
+        private System.Windows.Forms.Label lblAlgorythm;
+        private System.Windows.Forms.OpenFileDialog openFileDlgLoadPicture;
+        private System.Windows.Forms.Button btnProcessImage;
     }
 }
 
