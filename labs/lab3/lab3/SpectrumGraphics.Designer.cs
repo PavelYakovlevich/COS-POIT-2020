@@ -50,7 +50,6 @@
             this.chartASpectrum.Name = "chartASpectrum";
             this.chartASpectrum.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
             series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
             series1.Legend = "Legend1";
             series1.Name = "Amplitude Spectrum";
             series1.YValuesPerPoint = 3;
@@ -67,7 +66,6 @@
             this.chartPhaseSpectrum.Location = new System.Drawing.Point(12, 290);
             this.chartPhaseSpectrum.Name = "chartPhaseSpectrum";
             series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
             series2.Legend = "Legend1";
             series2.Name = "Phase Spectrum";
             this.chartPhaseSpectrum.Series.Add(series2);

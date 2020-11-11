@@ -17,9 +17,9 @@ namespace lab3
             FMax = fMax;
         }
 
-        public List<ISignal> Filter(List<GarmonicSignal> signals)
+        public List<GarmonicSignal> Filter(List<GarmonicSignal> signals)
         {
-            List<ISignal> result = new List<ISignal>();
+            List<GarmonicSignal> result = new List<GarmonicSignal>();
             foreach (GarmonicSignal temp in signals)
             {
                 if (FMin <= temp.GarmonicIndex && temp.GarmonicIndex <= FMax)

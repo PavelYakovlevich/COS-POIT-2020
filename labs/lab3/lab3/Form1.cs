@@ -59,7 +59,6 @@ namespace lab3
             double fi = Convert.ToDouble(txtBoxPhase.Text);
             int N = Convert.ToInt32(cmbBoxN.Text);
             int b = Convert.ToInt32(txtBoxB.Text);
-
             if (_poligarmonicMode)
             {
                 signal = PoligarmonicSignalGenerator.GeneratePoligarmonicSignal(GARMONICS_COUNT, N, _predefinedPValues, _predefinedFiValues);
@@ -70,14 +69,11 @@ namespace lab3
                 (signal as GarmonicSignal).Generate();
                 (signal as GarmonicSignal).AFinder.CalculateAmplitude((signal as GarmonicSignal).Values, (signal as GarmonicSignal).N);
             }
-
+            // выводить все гармоники
             if (_openChartAfterSignalCreation) 
             {
-                int fMin = Convert.ToInt32(txtBoxFMin.Text);
-                int fMax = Convert.ToInt32(txtBoxFMax.Text);
-                SpectrumFilter spectrumFilter = new SpectrumFilter(fMin, fMax);
                 SpectrumGraphics spectrumGraphicsForm = new SpectrumGraphics();
-                spectrumGraphicsForm.FillChart(signal, spectrumFilter);
+                spectrumGraphicsForm.FillChart(signal);
                 spectrumGraphicsForm.Show();
             }
         }
@@ -89,7 +85,10 @@ namespace lab3
                 ISignal restoredSignal = null;
                 if (_poligarmonicMode)
                 {
-                    restoredSignal = new PoligarmonicSignal(SpectrumUseUtil.RestoreSignalValues(signal, _useFiInCalculation));
+                    int fMin = Convert.ToInt32(txtBoxFMin.Text);
+                    int fMax = Convert.ToInt32(txtBoxFMax.Text);
+                    SpectrumFilter spectrumFilter = new SpectrumFilter(fMin, fMax);
+                    restoredSignal = new PoligarmonicSignal(SpectrumUseUtil.RestoreSignalValues(signal, _useFiInCalculation, spectrumFilter));
                 }
                 else if (!_poligarmonicMode) {
                     restoredSignal = new CosineSignal(SpectrumUseUtil.RestoreSignalValues(signal));

@@ -21,17 +21,22 @@ namespace lab3
         }
 
 
-        public void FillChart(ISignal signal, SpectrumFilter spectrumFilter)
+        public void FillChart(ISignal signal)
         {
             if (signal is GarmonicSignal)
             {
                 chartPhaseSpectrum.Series["Phase Spectrum"].Points.AddXY(1, (signal as GarmonicSignal).AFinder.StartPhase);
                 chartASpectrum.Series["Amplitude Spectrum"].Points.AddXY(1, (signal as GarmonicSignal).AFinder.AmplitudeValue);
+
+                for (int i = 2; i < (signal as GarmonicSignal).N / 2; i++)
+                {
+                    chartPhaseSpectrum.Series["Phase Spectrum"].Points.AddXY(i, 0);
+                    chartASpectrum.Series["Amplitude Spectrum"].Points.AddXY(i, 0);
+                }
             }
             else if (signal is PoligarmonicSignal)
             {
-                List<ISignal> filteredSignals = spectrumFilter.Filter((signal as PoligarmonicSignal).Signals);
-                foreach (var innerSignal in filteredSignals)
+                foreach (var innerSignal in (signal as PoligarmonicSignal).Signals)
                 {
                     chartPhaseSpectrum.Series["Phase Spectrum"].Points.AddXY((innerSignal as GarmonicSignal).GarmonicIndex, (innerSignal as GarmonicSignal).AFinder.StartPhase);
                     chartASpectrum.Series["Amplitude Spectrum"].Points.AddXY((innerSignal as GarmonicSignal).GarmonicIndex, (innerSignal as GarmonicSignal).AFinder.AmplitudeValue);

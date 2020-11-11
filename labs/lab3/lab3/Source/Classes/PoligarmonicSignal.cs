@@ -1,4 +1,5 @@
 ﻿using lab2.Src.Signal.Classes;
+using lab3.Source.Classes;
 using lab3.Source.Interfaces;
 using System.Collections.Generic;
 using System.Security.Policy;
@@ -8,8 +9,8 @@ namespace lab3
     public class PoligarmonicSignal : ISignal
     {
         private List<double> _values;
-
         public List<GarmonicSignal> Signals { get; private set; }
+        public AmplitudeFinder AFinder { get; private set; }
         public List<double> Values { get => _values; set => _values = value; }
 
         public PoligarmonicSignal()
