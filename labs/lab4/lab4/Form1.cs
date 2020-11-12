@@ -16,13 +16,11 @@ namespace lab4
         private Bitmap _sourcePicture;
         private Dictionary<string, IAlgorythm> _algoryths;
         private bool _imageIsLoaded;
-        private const int SOBEL_LIMIT = 128*128;
-        private const int GAUSS_SIGMA = 6;
-        private const int MEDIAN_FILTER_MATRIX_SIZE = 3;
-
+        private ParameterSettingForm _parameterSettingForm;
         public formMain()
         {
             InitializeComponent();
+            _parameterSettingForm = new ParameterSettingForm();
             InitializeAlgorithmsNames();
             LoadAlgNamesComboBox();
         }
@@ -37,13 +35,13 @@ namespace lab4
             cmbBox.Text = (string)cmbBox.Items[0];
         }
 
-        private void InitializeAlgorithmsNames()
+        public void InitializeAlgorithmsNames()
         {
             _algoryths = new Dictionary<string, IAlgorythm>();
-            _algoryths.Add("Собеля", new Sobel(SOBEL_LIMIT));
-            _algoryths.Add("Гаусса", new Gauss(GAUSS_SIGMA));
-            _algoryths.Add("Медианный", new MedianFilter(MEDIAN_FILTER_MATRIX_SIZE));
-            _algoryths.Add("Скользящее окно", new SlidingWindow());
+            _algoryths.Add("Собеля", new Sobel(_parameterSettingForm.SobelLimit));
+            _algoryths.Add("Гаусса", new Gauss(_parameterSettingForm.Sigma));
+            _algoryths.Add("Медианный", new MedianFilter(_parameterSettingForm.WindowSize));
+            _algoryths.Add("Скользящее окно", new SlidingWindow(_parameterSettingForm.WindowSize));
         }
 
         private void btnLoadImage_Click(object sender, EventArgs e)
@@ -58,13 +56,23 @@ namespace lab4
 
         private void btnProcessImage_Click(object sender, EventArgs e)
         {
+            _algoryths["Собеля"] = new Sobel(_parameterSettingForm.SobelLimit);
+            _algoryths["Гаусса"] =  new Gauss(_parameterSettingForm.Sigma);
+            _algoryths["Медианный"] =  new MedianFilter(_parameterSettingForm.WindowSize);
+            _algoryths["Скользящее окно"] = new SlidingWindow(_parameterSettingForm.WindowSize);
             if (_imageIsLoaded)
             {
+
                 pictureBoxResult.Image = _algoryths[cmbBox.Text].Process(new Bitmap(pictureBoxResult.Image));
                 return;
             }
 
             MessageBox.Show("Load image first!");
+        }
+
+        private void btnParamsSetting_Click(object sender, EventArgs e)
+        {
+            _parameterSettingForm.Show();
         }
     }
 }

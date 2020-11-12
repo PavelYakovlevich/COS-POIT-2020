@@ -24,88 +24,85 @@ namespace lab4.Classes
             int height = source.Height;
             int width = source.Width;
 
-            int windowSize = (int)Math.Ceiling(3 * Sigma);
+            int windowSize = (int)Math.Ceiling(6 * Sigma);
+            if (windowSize % 2 == 0)
+            {
+                windowSize++;
+            } 
 
+
+            double[,] window = new double[windowSize, windowSize];
+            int halfOfWindowSize = (windowSize - 1)/ 2;
+
+            InitializeWindow(window, windowSize);
+
+            double R = 0, G = 0, B = 0;
             double sum = 0;
-            double s2 = 2 * Sigma * Sigma;
 
-            double[] window = new double[windowSize];
-
-            InitializeWindow(window, s2);
-
-            int R = 0, G = 0, B = 0;
-            for (int j = 0; j < height; j++)
+            for (int i = halfOfWindowSize; i < source.Width - halfOfWindowSize - 1; i++)
             {
-                for (int i = 0; i < width; i++)
+                for (int j = halfOfWindowSize; j < source.Height - halfOfWindowSize - 1; j++)
                 {
-                    sum = 0;
                     R = 0;
                     G = 0;
                     B = 0;
-
-                    for (int k = 0; k < windowSize; k++)
-                    {
-                        int l = i + k;
-                        if (l < width)
-                        {
-                            Color temp = source.GetPixel(l, j);
-                            R += (int)(temp.R * window[k]);
-                            G += (int)(temp.G * window[k]);
-                            B += (int)(temp.B * window[k]);
-
-                            sum += window[k];
-                        }
-                    }
-
-                    R = (int)(R / sum);
-                    G = (int)(G / sum);
-                    B = (int)(B / sum);
-
-                    result.SetPixel(i, j, Color.FromArgb(R, G, B));
-                }
-            }
-
-            for (int i = 0; i < width; i++)
-            {
-                for (int j = 0; j < height; j++)
-                {
                     sum = 0;
-                    R = 0;
-                    G = 0;
-                    B = 0;
 
-                    for (int k = 0; k < windowSize; k++)
+                    for (int wi = -halfOfWindowSize; wi <= halfOfWindowSize; wi++)
                     {
-                        int l = j + k;
-                        if (l < height)
+                        for (int hw = -halfOfWindowSize; hw <= halfOfWindowSize; hw++)
                         {
-                            Color temp = source.GetPixel(i, l);
-                            R += (int)(temp.R * window[k]);
-                            G += (int)(temp.G * window[k]);
-                            B += (int)(temp.B * window[k]);
+                            Color retrievedPixel = source.GetPixel(i + hw, j + wi);
+                            R += window[wi + halfOfWindowSize, hw + halfOfWindowSize] * retrievedPixel.R;
+                            G += window[wi + halfOfWindowSize, hw + halfOfWindowSize] * retrievedPixel.G;
+                            B += window[wi + halfOfWindowSize, hw + halfOfWindowSize] * retrievedPixel.B;
 
-                            sum += window[k];
+                            sum += window[wi + halfOfWindowSize, hw + halfOfWindowSize];
                         }
                     }
 
-                    R = (int)(R / sum);
-                    G = (int)(G / sum);
-                    B = (int)(B / sum);
+                    R = CorrectColor(R);
+                    G = CorrectColor(G);
+                    B = CorrectColor(B);
 
-                    result.SetPixel(i, j, Color.FromArgb(R, G, B));
+                    result.SetPixel(i, j, Color.FromArgb((int)R, (int)G, (int)B));
                 }
             }
 
             return result;
         }
 
-        private void InitializeWindow(double[] window, double dQSigma)
+        private double CorrectColor(double color)
         {
-            window[0] = 1;
-            for (int i = 1; i < window.Length; i++)
+            color = color > 255 ? 255 : color;
+            color = color < 0 ? 0 : color;
+            return color;
+        }
+
+        private void InitializeWindow(double[,] window, int windowSize)
+        {
+         
+            double kernelSum = 0;
+            int foff = (windowSize - 1) / 2;
+            double distance = 0;
+            double constant = 1d / (2 * Math.PI * Sigma * Sigma);
+            for (int y = -foff; y <= foff; y++)
             {
-                window[i] = Math.Exp(-i * i / dQSigma);
+                for (int x = -foff; x <= foff; x++)
+                {
+                    distance = ((y * y) + (x * x)) / (2 * Sigma * Sigma);
+                    window[y + foff, x + foff] = constant * Math.Exp(-distance);
+                    kernelSum += window[y + foff, x + foff];
+                }
             }
+            for (int y = 0; y < windowSize; y++)
+            {
+                for (int x = 0; x < windowSize; x++)
+                {
+                    window[y, x] = window[y, x] * 1d / kernelSum;
+                }
+            }
+
         }
 
        

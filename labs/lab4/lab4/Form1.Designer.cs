@@ -34,6 +34,7 @@
             this.lblAlgorythm = new System.Windows.Forms.Label();
             this.openFileDlgLoadPicture = new System.Windows.Forms.OpenFileDialog();
             this.btnProcessImage = new System.Windows.Forms.Button();
+            this.btnParamsSetting = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxResult)).BeginInit();
             this.SuspendLayout();
             // 
@@ -58,7 +59,7 @@
             // cmbBox
             // 
             this.cmbBox.FormattingEnabled = true;
-            this.cmbBox.Location = new System.Drawing.Point(214, 427);
+            this.cmbBox.Location = new System.Drawing.Point(330, 400);
             this.cmbBox.Name = "cmbBox";
             this.cmbBox.Size = new System.Drawing.Size(195, 21);
             this.cmbBox.TabIndex = 3;
@@ -66,7 +67,7 @@
             // lblAlgorythm
             // 
             this.lblAlgorythm.AutoSize = true;
-            this.lblAlgorythm.Location = new System.Drawing.Point(214, 402);
+            this.lblAlgorythm.Location = new System.Drawing.Point(254, 403);
             this.lblAlgorythm.Name = "lblAlgorythm";
             this.lblAlgorythm.Size = new System.Drawing.Size(56, 13);
             this.lblAlgorythm.TabIndex = 4;
@@ -86,11 +87,22 @@
             this.btnProcessImage.UseVisualStyleBackColor = true;
             this.btnProcessImage.Click += new System.EventHandler(this.btnProcessImage_Click);
             // 
+            // btnParamsSetting
+            // 
+            this.btnParamsSetting.Location = new System.Drawing.Point(126, 392);
+            this.btnParamsSetting.Name = "btnParamsSetting";
+            this.btnParamsSetting.Size = new System.Drawing.Size(122, 84);
+            this.btnParamsSetting.TabIndex = 6;
+            this.btnParamsSetting.Text = "Параметры";
+            this.btnParamsSetting.UseVisualStyleBackColor = true;
+            this.btnParamsSetting.Click += new System.EventHandler(this.btnParamsSetting_Click);
+            // 
             // formMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(668, 488);
+            this.Controls.Add(this.btnParamsSetting);
             this.Controls.Add(this.btnProcessImage);
             this.Controls.Add(this.lblAlgorythm);
             this.Controls.Add(this.cmbBox);
@@ -111,6 +123,7 @@
         private System.Windows.Forms.Label lblAlgorythm;
         private System.Windows.Forms.OpenFileDialog openFileDlgLoadPicture;
         private System.Windows.Forms.Button btnProcessImage;
+        private System.Windows.Forms.Button btnParamsSetting;
     }
 }
 

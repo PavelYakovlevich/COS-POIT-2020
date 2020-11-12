@@ -8,3 +8,4 @@ D:\University\labs\4.1\COS\labs\lab4\lab4\bin\Debug\lab4.exe
 D:\University\labs\4.1\COS\labs\lab4\lab4\bin\Debug\lab4.pdb
 D:\University\labs\4.1\COS\labs\lab4\lab4\obj\Debug\lab4.exe
 D:\University\labs\4.1\COS\labs\lab4\lab4\obj\Debug\lab4.pdb
+D:\University\labs\4.1\COS\labs\lab4\lab4\obj\Debug\lab4.ParameterSettingForm.resources
