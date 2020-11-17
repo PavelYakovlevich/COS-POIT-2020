@@ -24,7 +24,7 @@ namespace lab4.Classes
             int height = source.Height;
             int width = source.Width;
 
-            int windowSize = (int)Math.Ceiling(6 * Sigma);
+            int windowSize = (int)Math.Ceiling(3 * Sigma);
             if (windowSize % 2 == 0)
             {
                 windowSize++;
@@ -39,9 +39,9 @@ namespace lab4.Classes
             double R = 0, G = 0, B = 0;
             double sum = 0;
 
-            for (int i = halfOfWindowSize; i < source.Width - halfOfWindowSize - 1; i++)
+            for (int i = 0; i < source.Width - 1; i++)
             {
-                for (int j = halfOfWindowSize; j < source.Height - halfOfWindowSize - 1; j++)
+                for (int j = 0; j < source.Height - 1; j++)
                 {
                     R = 0;
                     G = 0;
@@ -52,7 +52,37 @@ namespace lab4.Classes
                     {
                         for (int hw = -halfOfWindowSize; hw <= halfOfWindowSize; hw++)
                         {
-                            Color retrievedPixel = source.GetPixel(i + hw, j + wi);
+                            Color retrievedPixel = source.GetPixel(CheckBound(i + hw, source.Width - 1), CheckBound(j + wi, source.Height - 1));
+                            R += window[wi + halfOfWindowSize, hw + halfOfWindowSize] * retrievedPixel.R;
+                            G += window[wi + halfOfWindowSize, hw + halfOfWindowSize] * retrievedPixel.G;
+                            B += window[wi + halfOfWindowSize, hw + halfOfWindowSize] * retrievedPixel.B;
+
+                            sum += window[wi + halfOfWindowSize, hw + halfOfWindowSize];
+                        }
+                    }
+
+                    R = CorrectColor(R);
+                    G = CorrectColor(G);
+                    B = CorrectColor(B);
+
+                    result.SetPixel(i, j, Color.FromArgb((int)R, (int)G, (int)B));
+                }
+            }
+
+            for (int j = 0; j < source.Height - 1; j++)
+            {
+                for (int i = 0; i < source.Width - 1; i++)
+                {
+                    R = 0;
+                    G = 0;
+                    B = 0;
+                    sum = 0;
+
+                    for (int wi = -halfOfWindowSize; wi <= halfOfWindowSize; wi++)
+                    {
+                        for (int hw = -halfOfWindowSize; hw <= halfOfWindowSize; hw++)
+                        {
+                            Color retrievedPixel = source.GetPixel(CheckBound(i + hw, source.Width - 1), CheckBound(j + wi, source.Height - 1));
                             R += window[wi + halfOfWindowSize, hw + halfOfWindowSize] * retrievedPixel.R;
                             G += window[wi + halfOfWindowSize, hw + halfOfWindowSize] * retrievedPixel.G;
                             B += window[wi + halfOfWindowSize, hw + halfOfWindowSize] * retrievedPixel.B;
@@ -70,6 +100,21 @@ namespace lab4.Classes
             }
 
             return result;
+        }
+
+        private int CheckBound(int v, int v1)
+        {
+           if (v < 0)
+           {
+                return 0;
+           }
+
+            if (v > v1)
+            {
+                return v1;
+            }
+
+            return v;
         }
 
         private double CorrectColor(double color)
