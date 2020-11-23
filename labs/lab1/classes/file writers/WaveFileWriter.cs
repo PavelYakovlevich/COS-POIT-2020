@@ -33,6 +33,23 @@ namespace lab1.classes
             return retVal;
         }
 
+        private byte[] PackageDouble(double source, int length = 2)
+        {
+            if (length <= 0 || length > 8)
+                throw new ArgumentException("length must be either 4 or 8", "length");
+            byte[] retVal = new byte[length];
+            byte offset = 0;
+            short convertedSource = (short)(source);
+
+            for (int i = 0; i < length; i++)
+            {
+                retVal[i] = (byte)((convertedSource >> offset) & 0xFF);
+                offset += 8;
+            }
+
+            return retVal;
+        }
+
         private void WriteHeader(System.IO.Stream targetStream, int byteStreamSize, int channelCount, int sampleRate)
         {
             int byteRate = sampleRate * channelCount * BYTES_PER_SAMPLE;
@@ -56,7 +73,7 @@ namespace lab1.classes
             targetStream.Write(PackageInt(byteStreamSize, 4), 0, 4);
         }
 
-        public void RecordSignal(string fileName, List<short> values)
+        public void RecordSignal(string fileName, List<double> values)
         {
             if (File.Exists(fileName))
             {
@@ -65,18 +82,22 @@ namespace lab1.classes
 
             using (FileStream fs = new FileStream(fileName, FileMode.Create))
             {
-                WriteHeader(fs, values.Count * sizeof(short), 1, 44100);
-                byte[] soundData = GetSoundData(values);
+                WriteHeader(fs, values.Count * 4, 1, 44100);
+                byte[] soundData = GetSoundData(values, 2);
                 fs.Write(soundData, 0, soundData.Length);
                 fs.Close();
             }
         }
 
-        private byte[] GetSoundData(List<short> values)
+        private byte[] GetSoundData(List<double> values, int convertedValueLength)
         {
-            byte[] res = new byte[values.Count * sizeof(short)];
+            byte[] res = new byte[values.Count * convertedValueLength];
 
-            Buffer.BlockCopy(values.ToArray(), 0, res, 0, res.Length);
+            for (int i = 0; i < values.Count; i++)
+            {
+                var debug = PackageDouble(values[i], convertedValueLength);
+                Buffer.BlockCopy(PackageDouble(values[i], convertedValueLength), 0, res, i * convertedValueLength, convertedValueLength);
+            }
 
             return res;
         }

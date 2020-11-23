@@ -2,9 +2,12 @@ D:\University\labs\4.1\COS\labs\lab1\bin\Debug\lab1.exe.config
 D:\University\labs\4.1\COS\labs\lab1\bin\Debug\lab1.exe
 D:\University\labs\4.1\COS\labs\lab1\bin\Debug\lab1.pdb
 D:\University\labs\4.1\COS\labs\lab1\obj\Debug\lab1.csprojAssemblyReference.cache
-D:\University\labs\4.1\COS\labs\lab1\obj\Debug\lab1.Form1.resources
 D:\University\labs\4.1\COS\labs\lab1\obj\Debug\lab1.Properties.Resources.resources
 D:\University\labs\4.1\COS\labs\lab1\obj\Debug\lab1.csproj.GenerateResource.cache
 D:\University\labs\4.1\COS\labs\lab1\obj\Debug\lab1.csproj.CoreCompileInputs.cache
 D:\University\labs\4.1\COS\labs\lab1\obj\Debug\lab1.exe
 D:\University\labs\4.1\COS\labs\lab1\obj\Debug\lab1.pdb
+D:\University\labs\4.1\COS\labs\lab1\obj\Debug\lab1.frmMain.resources
+D:\University\labs\4.1\COS\labs\lab1\bin\Debug\NAudio.dll
+D:\University\labs\4.1\COS\labs\lab1\bin\Debug\NAudio.xml
+D:\University\labs\4.1\COS\labs\lab1\obj\Debug\lab1.csproj.CopyComplete
